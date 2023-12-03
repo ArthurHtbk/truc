@@ -1,6 +1,16 @@
 // Import required dependencies
 const { database, tables } = require("../setup");
 
+describe("Read all items", () => {
+  it("should read all items succesfully", async () => {
+    const response = await tables.item.readAll();
+
+    expect(response).toBeInstanceOf(Array);
+    expect(response[0]).toBeDefined();
+    expect(response[0]).toBeInstanceOf(Object);
+  });
+});
+
 // Test suite for the create method of ItemManager
 describe("Create item", () => {
   it("should create an item successfully", async () => {
