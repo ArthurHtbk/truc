@@ -41,6 +41,26 @@ class ItemManager extends AbstractManager {
     return rows;
   }
 
+  async update(item) {
+    const { title, id } = item;
+
+    const [response] = await this.database.query(
+      `UPDATE ${this.table} SET title = ? WHERE id = ?`,
+      [title, id]
+    );
+
+    return response;
+  }
+
+  async delete(id) {
+    const [response] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+
+    return response;
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 

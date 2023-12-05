@@ -1,47 +1,24 @@
 // Import required dependencies
-const { database, tables } = require("../setup");
+const {
+  readAllManagerTest,
+  readManagerTest,
+  createManagerTest,
+  updateManagerTest,
+  deleteManagerTest,
+} = require("../globalManagers");
 
-describe("Read all items", () => {
-  it("should read all items succesfully", async () => {
-    const response = await tables.item.readAll();
+const item = "item";
 
-    expect(response).toBeInstanceOf(Array);
-    expect(response[0]).toBeDefined();
-    expect(response[0]).toBeInstanceOf(Object);
-  });
-});
+const newItem = {
+  title: "Sample item",
+};
 
-// Test suite for the create method of ItemManager
-describe("Create item", () => {
-  it("should create an item successfully", async () => {
-    // Define a sample item for testing
-    const testItem = {
-      title: "Sample Item",
-    };
+const updatedItem = {
+  title: "Updated item",
+};
 
-    // Send a create request to the item table with a test item
-    const insertId = await tables.item.create(testItem);
-
-    // Check if the newly added item exists in the database
-    const [rows] = await database.query(
-      "select * from item where id = ?",
-      insertId
-    );
-
-    const foundItem = rows[0];
-
-    // Assertions
-    expect(foundItem).toBeDefined();
-    expect(foundItem.title).toBe(testItem.title);
-  });
-
-  it("should throw when passing invalid object", async () => {
-    // Thx https://jestjs.io/docs/asynchronous#asyncawait
-
-    // Send a create request to the item table with an empty object
-    const promise = tables.item.create({});
-
-    // Assertions
-    await expect(promise).rejects.toThrow();
-  });
-});
+readAllManagerTest(item);
+readManagerTest(item, newItem);
+createManagerTest(item, newItem);
+updateManagerTest(item, newItem, updatedItem);
+deleteManagerTest(item, newItem);
