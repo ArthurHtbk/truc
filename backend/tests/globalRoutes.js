@@ -21,7 +21,7 @@ const browseRouteTest = (endpoint, table, obj) => {
       // Assertions
       expect(foundItem).toBeInstanceOf(Object);
       for (const prop in obj) {
-        if (obj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           expect(foundItem).toHaveProperty(prop);
           expect(foundItem[prop]).toBe(obj[prop]);
         }
@@ -45,7 +45,7 @@ const readRouteTest = (endpoint, table, obj) => {
       expect(response.body).toBeInstanceOf(Object);
       expect(response.body.id).toBe(insertId);
       for (const prop in obj) {
-        if (obj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           expect(response.body).toHaveProperty(prop);
           expect(response.body[prop]).toBe(obj[prop]);
         }
@@ -83,7 +83,7 @@ const addRouteTest = (endpoint, table, obj) => {
       // Assertions
       expect(foundItem).toBeDefined();
       for (const prop in obj) {
-        if (obj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           expect(foundItem).toHaveProperty(prop);
           expect(foundItem[prop]).toBe(obj[prop]);
         }
@@ -115,7 +115,7 @@ const editRouteTest = (endpoint, table, obj, newObj) => {
       // Assertions
       expect(foundItem).toBeDefined();
       for (const prop in newObj) {
-        if (newObj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(newObj, prop)) {
           expect(foundItem).toHaveProperty(prop);
           expect(foundItem[prop]).toBe(newObj[prop]);
         }

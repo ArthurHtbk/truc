@@ -31,7 +31,7 @@ const readManagerTest = (table, obj) => {
       expect(response).toBeInstanceOf(Object);
 
       for (const prop in obj) {
-        if (obj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           expect(response).toHaveProperty(prop);
           expect(response[prop]).toBe(obj[prop]);
         }
@@ -54,7 +54,7 @@ const createManagerTest = (table, obj) => {
 
       expect(foundItem).toBeDefined();
       for (const prop in obj) {
-        if (obj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           expect(foundItem).toHaveProperty(prop);
           expect(foundItem[prop]).toBe(obj[prop]);
         }
@@ -92,7 +92,7 @@ const updateManagerTest = (table, obj, newObj) => {
       expect(foundItem).toBeDefined();
       expect(foundItem).toBeInstanceOf(Object);
       for (const prop in newObj) {
-        if (newObj.hasOwn(prop)) {
+        if (Object.prototype.hasOwnProperty.call(newObj, prop)) {
           expect(foundItem).toHaveProperty(prop);
           expect(foundItem[prop]).toBe(newObj[prop]);
         }
