@@ -70,6 +70,7 @@ const addRouteTest = (endpoint, table, obj) => {
   describe(`POST ${endpoint}`, () => {
     it("should add a new item successfully", async () => {
       // Send a POST request to the /api/items endpoint with a test item
+
       const response = await request(app).post(endpoint).send(obj);
 
       // Assertions

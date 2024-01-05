@@ -4,11 +4,32 @@ const database = require("../../database/client");
 // Provide database access through AbstractManager class
 class AbstractManager {
   constructor({ table }) {
-    // Store the table name
     this.table = table;
-
-    // Provide access to the database client
     this.database = database;
+  }
+
+  async readAll() {
+    const [rows] = await this.database.query(`select * from ${this.table}`);
+
+    return rows;
+  }
+
+  async read(id) {
+    const [rows] = await this.database.query(
+      `select * from ${this.table} where id = ?`,
+      [id]
+    );
+
+    return rows[0];
+  }
+
+  async delete(id) {
+    const [response] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+
+    return response;
   }
 }
 
